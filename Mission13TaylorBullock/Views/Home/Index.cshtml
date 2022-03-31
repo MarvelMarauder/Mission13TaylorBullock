@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<Bowler>
+@if (Model.Count() > 10)
+{
+    <h1>Welcome to the list of all Teams!</h1>
+}
+else 
+{ 
+    <h1>Welcome to the team roster of the @Model.First().Team.TeamName</h1>
+}
+<table class="table table-striped">
+    <thead >
+        <tr class="table-dark">
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Middle Initial</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Phone</th>
+            <th>Team</th>
+            <th colspan="2">Actions</th>
+        </tr>
+
+        @foreach (Bowler b in Model)
+        {
+            <tr>
+                <td>@b.BowlerLastName</td>
+                <td>@b.BowlerFirstName</td>
+                <td>@b.BowlerMiddleInit</td>
+                <td>@b.BowlerAddress</td>
+                <td>@b.BowlerCity</td>
+                <td>@b.BowlerState</td>
+                <td>@b.BowlerZip</td>
+                <td>@b.BowlerPhoneNumber</td>
+                <td>@b.Team.TeamName</td>
+                <td><a asp-controller="Home" asp-action="EditBowler" asp-route-bowlerid="@b.BowlerID">Edit</a></td>
+                <td><a asp-controller="Home" asp-action="DeleteBowler" asp-route-bowlerid="@b.BowlerID">Delete</a></td>
+            </tr>
+        }
+    </thead>
+</table>
+
